@@ -1,42 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: analbarr <analbarr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 18:44:21 by analbarr          #+#    #+#             */
-/*   Updated: 2023/04/12 18:44:47 by analbarr         ###   ########.fr       */
+/*   Created: 2023/04/18 16:11:39 by analbarr          #+#    #+#             */
+/*   Updated: 2023/04/18 16:11:52 by analbarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-char	*ft_strpbrk(const char *s1, const char *s2)
+size_t	ft_strspn(const char *s, const char *accept)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
+	size_t	count;
 
-	while(*s1)
+	i = 0;
+	j = 0;
+	count = 0;
+	while (s[i] != '\0')
 	{
-		i = 0;
-		while (s2[i] != '\0')
+		while(accept[j] != '\0')
 		{
-			if (*s1 == s2[i])
-				return (char *)s1;
-			i++;
+			if (s[i] == accept[j])
+			{
+				count++;
+				break;
+			}
+			j++;
 		}
-		s1++;
+	i++;
 	}
-	return (0);
+	return (count);
 }
 
 int	main(void)
 {
-	char	s1[] = "hola";
-	char	s2[] = "aeiou";
+	char str[] = "abcde";
+	char accept[] = "l";
 
-	printf("%s", ft_strpbrk(s1, s2));
-	printf("%s", strpbrk(s1, s2));
+	printf("%zu\n", strspn(str, accept));
+	printf("%zu\n", ft_strspn(str, accept));
 	return (0);
 }

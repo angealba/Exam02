@@ -1,42 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: analbarr <analbarr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 18:44:21 by analbarr          #+#    #+#             */
-/*   Updated: 2023/04/12 18:44:47 by analbarr         ###   ########.fr       */
+/*   Created: 2023/04/18 13:08:28 by analbarr          #+#    #+#             */
+/*   Updated: 2023/04/18 13:08:38 by analbarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <string.h>
 
-char	*ft_strpbrk(const char *s1, const char *s2)
+int	ft_strlen(char *str)
 {
 	int	i;
 
-	while(*s1)
+	i = 0;
+	while(str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strrev(char *str)
+{
+	int		i;
+	char	tmp;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(str);
+	printf("len: %d\n", len); 
+	while (i < len / 2)
 	{
-		i = 0;
-		while (s2[i] != '\0')
-		{
-			if (*s1 == s2[i])
-				return (char *)s1;
-			i++;
-		}
-		s1++;
+		tmp = str[i];
+		str[i] = str[len - 1 - i];
+		str[len - 1 - i] = tmp;
+		i++;
 	}
-	return (0);
+	return (str);
 }
 
 int	main(void)
 {
-	char	s1[] = "hola";
-	char	s2[] = "aeiou";
+	char	str[] = "hola";
 
-	printf("%s", ft_strpbrk(s1, s2));
-	printf("%s", strpbrk(s1, s2));
+	printf("str: %s\n", str); 
+	ft_strrev(str);
+	printf("str2: %s\n", str); 
 	return (0);
 }
